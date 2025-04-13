@@ -21,7 +21,7 @@ async function page() {
                     </li>
                 ))}
             </ul>
-            <Link href="/form">Create User</Link>
+            <Link href="/user/new">Create User</Link>
 
         </>
 
