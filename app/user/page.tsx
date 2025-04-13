@@ -1,9 +1,9 @@
 import React from 'react'
 import { usersAll } from "@/lib/actions";
-import { PrismaClient } from '@prisma/client';
+
 
 async function page() {
-    // const prisma = new PrismaClient();
+    
     const user = await usersAll();
 
     return (
