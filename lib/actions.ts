@@ -84,5 +84,11 @@ export function add(a: number, b: number): number {
         }
     }
 
-
+export async function handleFormSubmit(
+  previousState: { message: string },
+  formData: FormData
+): Promise<{ message: string }> {
+  const name = formData.get('name')?.toString();
+  return { message: `Hello, ${name || 'Guest'}!` };
+}
 
