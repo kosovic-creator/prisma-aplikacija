@@ -22,7 +22,7 @@ export async function createUserAction(
       message: "Unknown Error Occured!",
     };
   }
-  redirect("/");
+  redirect("/user");
 }
 
 export async function deleteAllUsers() {

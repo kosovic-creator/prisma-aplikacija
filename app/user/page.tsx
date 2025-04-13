@@ -1,9 +1,9 @@
 import React from 'react'
-import { usersAll } from "@/lib/actions";
+import { usersAll } from "@/lib/user.actions";
 
 
 async function page() {
-    
+
     const user = await usersAll();
 
     return (
