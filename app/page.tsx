@@ -1,5 +1,6 @@
 
 import prisma from "@/lib/prisma";
+import Link from "next/link";
 
 export default async function Home() {
 
@@ -14,7 +15,7 @@ export default async function Home() {
     </div>
   ))}
 
-
+<Link href="/form">Create User</Link>
 
   </>
   );
