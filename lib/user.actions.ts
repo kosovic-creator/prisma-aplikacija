@@ -22,6 +22,7 @@ export async function createUserAction(
       message: "Unknown Error Occured!",
     };
   }
+  console.log("User created");
   redirect("/user");
 }
 

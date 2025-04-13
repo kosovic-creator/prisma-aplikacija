@@ -1,5 +1,6 @@
 import React from 'react'
 import { usersAll } from "@/lib/user.actions";
+import Link from 'next/link';
 
 
 async function page() {
@@ -13,38 +14,18 @@ async function page() {
             <ul>
                 {user.map((user) => (
                     <li key={user.id}>
-                        {user.name} - {user.email}
+                        {user.name} - {user.email}- {user.age}
+                        <Link href={`/user/${user.id}`}>View</Link>
+                        <Link href={`/user/${user.id}/edit`}>Edit</Link>
+                        <Link href={`/user/${user.id}/delete`}>Delete</Link>
                     </li>
                 ))}
             </ul>
-            {/* <h2>Create User</h2>
-            <form action={async (formData: FormData) => {
-                'use server'
-                const name = formData.get('name') as string;
-                const email = formData.get('email') as string;
-                const userKreate = await prisma.user.create({
-                    data: {
-                        name,
-                        email,
-                    },
-                });
-                console.log(userKreate);
-            }
-            }>
-                <input type="text" name="name" placeholder="Name" required />
-                <input type="email" name="email" placeholder="Email" required />
-                <button type="submit">Create User</button>
-            </form> */}
+            <Link href="/form">Create User</Link>
+
         </>
 
     )
-
-        // const userKreate = await prisma.user.create({
-        //     data: {
-        //         name: "Default User", // Replace with actual user data
-        //         email: "default@example.com", // Replace with actual user data
-        //     },
-        // });
 }
 
 export default page
