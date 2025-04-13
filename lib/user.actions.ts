@@ -12,17 +12,10 @@ export async function createUserAction(
   try {
     const name = formData.get("name") as string;
     const age = Number(formData.get("age") as string);
-
     const email = formData.get("email") as string;
-
-
-
     if (!name || !email) {
       return { message: "All fields are required" };
     }
-
-
-
     await prisma.user.create({ data: { name, email,age } });
   } catch (err: unknown) {
     return {
@@ -31,44 +24,99 @@ export async function createUserAction(
   }
   redirect("/");
 }
-export async function updateUserAction(
-  formState: { message: string },
-  formData: FormData
-) {
+
+export async function deleteAllUsers() {
   try {
-    const id = formData.get("id") as string;
-    const name = formData.get("name") as string;
-    const username = formData.get("username") as string;
-    let password = formData.get("password") as string;
-    const email = formData.get("email") as string;
-    if (!name || !username || !password || !email) {
-      return { message: "All fields are required" };
-    }
-
-    const duplicate = await db.user.findUnique({
-      where: {
-        username: username,
-      },
-    });
-
-    if (duplicate) {
-      return { message: "That username already exists." };
-    }
-
-    if (password.length < 5) {
-      return { message: "Password is too short." };
-    }
-
-    password = await bcrypt.hash(password, 10);
-
-    await db.user.update({
-      where: { id },
-      data: { name, username,email, password },
-    });
-  } catch (err: unknown) {
-    return {
-      message: "Unknown Error Occured!",
-    };
+    return await prisma.user.deleteMany();
+  } catch (error) {
+    console.error("Error deleting all users:", error);
+    throw error;
   }
-  redirect("/");
+}
+export async function deleteUser(id: number) {
+  try {
+    return await prisma.user.delete({
+      where: { id },
+    });
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    throw error;
+  }
+}
+export async function updateUser(id: number, name: string) {
+  try {
+    return await prisma.user.update({
+      where: { id },
+      data: { name },
+    });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    throw error;
+  }
+}
+export async function userById(id: number) {
+  try {
+    return await prisma.user.findUnique({
+      where: { id },
+    });
+  } catch (error) {
+    console.error("Error fetching user by ID:", error);
+    throw error;
+  }
+}
+export async function usersAll() {
+  try {
+    return await prisma.user.findMany();
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    throw error;
+  }
+}
+export async function getUserCount() {
+  try {
+    return await prisma.user.count();
+  } catch (error) {
+    console.error("Error fetching user count:", error);
+    throw error;
+  }
+}
+export async function getUserByEmail(email: string) {
+  try {
+    return await prisma.user.findUnique({
+      where: { email },
+    });
+  } catch (error) {
+    console.error("Error fetching user by email:", error);
+    throw error;
+  }
+}
+export async function getUserByName(name: string) {
+  try {
+    return await prisma.user.findFirst({
+      where: { name },
+    });
+  } catch (error) {
+    console.error("Error fetching user by name:", error);
+    throw error;
+  }
+}
+export async function getUserById(id: number) {
+  try {
+    return await prisma.user.findUnique({
+      where: { id },
+    });
+  } catch (error) {
+    console.error("Error fetching user by ID:", error);
+    throw error;
+  }
+}
+export async function getUserByAge(age: number) {
+  try {
+    return await prisma.user.findMany({
+      where: { age },
+    });
+  } catch (error) {
+    console.error("Error fetching users by age:", error);
+    throw error;
+  }
 }

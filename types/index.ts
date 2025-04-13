@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { z } from "zod";
 const UserSchema = z.object({
     name: z.string().min(3, "Ime mora imati najmanje 3 karaktera"),
