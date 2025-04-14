@@ -5,10 +5,12 @@ import UpdateUserForm from "./UpdateUserForm";
 export default async function page({
   params,
 }: {
-  params: { id: string };
+    params: Promise<{ id: string }>;
 }) {
-  const { id } = params;
-  const user = await updateUser({ id: parseInt(id) });
+  const { id } = await params; // Await the params to resolve
+
+  // Ensure `id` is parsed correctly
+  const user = await updateUser({ id: parseInt(id, 10) });
 
   return (
     <div>
