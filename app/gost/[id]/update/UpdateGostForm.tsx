@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { updateGost } from "@/lib/gost.actions";
 import { useRouter } from "next/navigation";
 
@@ -19,10 +21,10 @@ export default function UpdateGostForm({ id, gost }: { id: string; gost: { name:
         router.push(`/gost`);
       }}
     >
-      <input type="text" name="name" defaultValue={gost.name} />
-      <input type="text" name="email" defaultValue={gost.email} />
-      <input type="number" name="age" defaultValue={gost.age || ""} />
-      <button type="submit">Update</button>
+      <Input type="text" name="name" defaultValue={gost.name} />
+      <Input type="text" name="email" defaultValue={gost.email} />
+      <Input type="number" name="age" defaultValue={gost.age || ""} />
+      <Button className="bg-emerald-950 text-amber-50" type="submit">Izmjeni</Button>
     </form>
   );
 }
