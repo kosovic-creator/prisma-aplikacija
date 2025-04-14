@@ -44,11 +44,15 @@ export async function deleteUser(id: number) {
     throw error;
   }
 }
-export async function updateUser(id: number, name: string) {
+export async function updateUser({ id, name, email, age }: { id: number; name?: string; email?: string; age?: number | null }) {
   try {
     return await prisma.user.update({
       where: { id },
-      data: { name },
+      data: {
+        ...(name && { name }),
+        ...(email && { email }),
+        ...(age !== undefined && { age }),
+      },
     });
   } catch (error) {
     console.error("Error updating user:", error);

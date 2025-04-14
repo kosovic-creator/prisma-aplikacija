@@ -1,8 +1,9 @@
+
 import { userById } from "@/lib/user.actions";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-export default async function Page({
+export default async function page({
 
   params,
 }: {
