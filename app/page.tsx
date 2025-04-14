@@ -16,7 +16,7 @@ export default async function Home() {
     </div>
   ))} */}
 
-{/* <Link href="/gost/new">Create gost</Link> */}
+
 <Gost/>
 
     </>
