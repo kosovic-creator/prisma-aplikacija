@@ -16,7 +16,7 @@ export default function UpdateGostForm({ id, gost }: { id: string; gost: { name:
         const age = formData.get("age") ? parseInt(formData.get("age") as string) : null;
 
         await updateGost({ id: parseInt(id), name, email, age });
-        router.push(`/gost/${id}`);
+        router.push(`/gost`);
       }}
     >
       <input type="text" name="name" defaultValue={gost.name} />

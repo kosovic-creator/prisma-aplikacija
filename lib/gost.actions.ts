@@ -29,8 +29,14 @@ export async function createGostAction(
     }
     await prisma.gost.create({ data: { name, email,age } });
   } catch {
+    // toast({
+    //   title: "Error",
+    //   description: "Unknown Error Occured!",
+    //   variant: "destructive",
+    // });
+
     return {
-      message: "Unknown Error Occured!",
+      message: "Unknown Error Occured!"
     };
   }
   console.log("gost created");
@@ -66,16 +72,16 @@ export async function updateGost({ id, name, email, age }: { id: number; name?: 
     throw error;
   }
 }
-// export async function gostById(id: number) {
-//   try {
-//     return await prisma.gost.findUnique({
-//       where: { id },
-//     });
-//   } catch (error) {
-//     console.error("Error fetching gost by ID:", error);
-//     throw error;
-//   }
-// }
+export async function gostById(id: number) {
+  try {
+    return await prisma.gost.findUnique({
+      where: { id },
+    });
+  } catch (error) {
+    console.error("Error fetching gost by ID:", error);
+    throw error;
+  }
+}
 
 // export async function getgostCount() {
 //   try {
