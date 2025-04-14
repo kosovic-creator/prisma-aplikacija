@@ -4,7 +4,7 @@ import UserSchema from '@/types/index';
 import { toast } from '@/hooks/use-toast';
 
 export default function Zod() {
-  const userData = { name: "Ana", age: 25, email: "ana@mple.com" };
+  const userData = { name: "Ana", age: 25, email: "anample.com" };
 
   const result = UserSchema.safeParse(userData);
 
@@ -20,7 +20,15 @@ export default function Zod() {
 
   } else {
     console.error("Greške u validaciji:", result.error.format());
+toast({
+      title: "Greška u validaciji",
+      description: "Podaci nisu validni.",
+      variant: "destructive",
+    });
+
   }
+
+
   return (
     <div>
       <h1>User Page</h1>
