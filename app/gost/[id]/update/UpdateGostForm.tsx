@@ -1,9 +1,9 @@
 "use client";
 
-import { updateUser } from "@/lib/user.actions";
+import { updateGost } from "@/lib/gost.actions";
 import { useRouter } from "next/navigation";
 
-export default function UpdateUserForm({ id, user }: { id: string; user: { name: string; email: string; age: number | null } }) {
+export default function UpdateGostForm({ id, gost }: { id: string; gost: { name: string; email: string; age: number | null } }) {
   const router = useRouter();
 
   return (
@@ -15,13 +15,13 @@ export default function UpdateUserForm({ id, user }: { id: string; user: { name:
         const email = formData.get("email") as string;
         const age = formData.get("age") ? parseInt(formData.get("age") as string) : null;
 
-        await updateUser({ id: parseInt(id), name, email, age });
-        router.push(`/user/${id}`);
+        await updateGost({ id: parseInt(id), name, email, age });
+        router.push(`/gost/${id}`);
       }}
     >
-      <input type="text" name="name" defaultValue={user.name} />
-      <input type="text" name="email" defaultValue={user.email} />
-      <input type="number" name="age" defaultValue={user.age || ""} />
+      <input type="text" name="name" defaultValue={gost.name} />
+      <input type="text" name="email" defaultValue={gost.email} />
+      <input type="number" name="age" defaultValue={gost.age || ""} />
       <button type="submit">Update</button>
     </form>
   );

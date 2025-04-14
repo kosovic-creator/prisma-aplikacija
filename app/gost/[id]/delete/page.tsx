@@ -1,4 +1,4 @@
-import { deleteUser } from '@/lib/user.actions';
+import { deleteGost } from '@/lib/gost.actions';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -8,7 +8,7 @@ interface PageProps {
 
 export default async function page({ params }: PageProps) {
   const { id } = await params; // Await the params object
-  const user = await deleteUser(parseInt(id));
+  const user = await deleteGost(parseInt(id));
 
   if (!user) {
     notFound();

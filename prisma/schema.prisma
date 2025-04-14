@@ -18,7 +18,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Gost {
   id    Int     @id @default(autoincrement())
   name  String
   age   Int?

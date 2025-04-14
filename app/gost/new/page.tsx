@@ -1,11 +1,11 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { createUserAction } from '@/lib/user.actions';
+import { creategostAction } from '@/lib/gost.actions';
 import { useFormState } from 'react-dom';
 
 const Page: React.FC = () => {
-    const [state, formAction] = useFormState(createUserAction, { message: '' });
+    const [state, formAction] = useFormState(creategostAction, { message: '' });
 
     return (
         <form action={formAction}>

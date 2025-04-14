@@ -4,18 +4,18 @@ import Link from "next/link";
 
 export default async function Home() {
 
-  const users= await prisma.user.findMany()
+  const gosts= await prisma.gost.findMany()
   return (
   <>
-{users.map((user) => (
-    <div key={user.id}>
-      <h2>{user.name}</h2>
-      <p>{user.email}</p>
-      <p>{user.age}</p>
+{gosts.map((gost) => (
+    <div key={gost.id}>
+      <h2>{gost.name}</h2>
+      <p>{gost.email}</p>
+      <p>{gost.age}</p>
     </div>
   ))}
 
-<Link href="/form">Create User</Link>
+<Link href="/gost/new">Create gost</Link>
 
   </>
   );
