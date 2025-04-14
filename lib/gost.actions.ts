@@ -1,11 +1,13 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 "use server";
 
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
 
 
-export async function creategostAction(
+// Removed duplicate declaration of prisma
+
+export async function createGostAction(
   formState: { message: string },
   formData: FormData
 ) {
@@ -17,7 +19,7 @@ export async function creategostAction(
       return { message: "All fields are required" };
     }
     await prisma.gost.create({ data: { name, email,age } });
-  } catch (err: unknown) {
+  } catch {
     return {
       message: "Unknown Error Occured!",
     };
@@ -26,23 +28,25 @@ export async function creategostAction(
   redirect("/gost");
 }
 
-export async function deleteAllgosts() {
-  try {
-    return await prisma.gost.deleteMany();
-  } catch (error) {
-    console.error("Error deleting all gosts:", error);
-    throw error;
-  }
-}
+// export async function deleteAllgosts() {
+//   try {
+//     return await prisma.gost.deleteMany();
+//   } catch (error) {
+//     console.error("Error deleting all gosts:", error);
+//     throw error;
+//   }
+// }
 export async function deleteGost(id: number) {
   try {
     return await prisma.gost.delete({
       where: { id },
     });
-  } catch (error) {
-    console.error("Error deleting gost:", error);
-    throw error;
+  } catch {
+    return {
+      message: "Unknown Error Occured!",
+    };
   }
+  console.log("gost created");
   redirect("/gost");
 }
 export async function updateGost({ id, name, email, age }: { id: number; name?: string; email?: string; age?: number | null }) {

@@ -16,7 +16,8 @@ export default async function page({
     <div>
       <h1>Update gost</h1>
       <UpdategostForm id={id} gost={{ ...gost, email: gost.email ?? "" }} />
-      <Link href={`/gost/${id}`}>Back to gost</Link>
+      <Link href={`/gost`}>Back to gost</Link>
+      {/* <Link href={`/gost/${id}`}>Back to gost</Link> */}
     </div>
   );
 }

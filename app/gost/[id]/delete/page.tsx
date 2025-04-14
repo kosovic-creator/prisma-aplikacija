@@ -8,26 +8,27 @@ interface PageProps {
 
 export default async function page({ params }: PageProps) {
   const { id } = await params; // Await the params object
-  const user = await deleteGost(parseInt(id));
+  const gost = await deleteGost(parseInt(id));
 
-  if (!user) {
+  if (!gost) {
     notFound();
   }
 
   return (
     <>
-      <h1 className="text-3xl font-bold">Delete User</h1>
-      <p className="text-lg">Are you sure you want to delete this user?</p>
+
+      <h1 className="text-3xl font-bold">Delete gost</h1>
+      <p className="text-lg">Are you sure you want to delete this gost?</p>
       <div className="flex gap-4">
-        <Link href="/user" className="btn btn-primary">
+        <Link href="/gost/" className="btn btn-primary">
           Yes
         </Link>
-        <Link href="/user" className="btn btn-secondary">
+        <Link href="/gost" className="btn btn-secondary">
           No
         </Link>
       </div>
       <div className="flex gap-4">
-        <Link href="/user" className="btn btn-primary">Go Back</Link>
+        <Link href="/gost" className="btn btn-primary">Go Back</Link>
       </div>
     </>
   );
