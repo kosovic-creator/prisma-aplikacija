@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
 
-async function page() {
+async function Gost() {
 
     const gost = await gostsAll();
 
@@ -12,7 +12,7 @@ async function page() {
         <>
 
             {/* <Link href="/gost/new">Dodaj Gosta</Link> */}
-            <Button className="btn btn-primary bg-blue-900 text-amber-50  " > <Link href="/gost/new">Dodaj Gosta</Link></Button>
+            <Button className="btn btn-primary  " > <Link href="/gost/new">Dodaj Gosta</Link></Button>
             <table className='w-full mt-4 '>
                 <caption className='text-2xl font-bold'>Gosti</caption>
 
@@ -50,4 +50,4 @@ async function page() {
     )
 }
 
-export default page
+export default Gost
