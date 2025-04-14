@@ -43,6 +43,7 @@ export async function deleteUser(id: number) {
     console.error("Error deleting user:", error);
     throw error;
   }
+  redirect("/user");
 }
 export async function updateUser({ id, name, email, age }: { id: number; name?: string; email?: string; age?: number | null }) {
   try {
