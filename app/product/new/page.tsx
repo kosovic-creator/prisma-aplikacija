@@ -3,30 +3,37 @@
 import { useState } from 'react';
 import { createProduct } from '@/lib/product.actions';
 import { useRouter } from 'next/navigation';
+import { z } from 'zod';
+import productSchema from '@/types';
+
+
 
 export default function NewProductPage() {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [message, setMessage] = useState('');
   const router = useRouter();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
+      // Validirajte unos pomoću Zod šeme
+      productSchema.parse({ name, price });
+
       const priceNumber = parseFloat(price);
-      if (isNaN(priceNumber)) {
-        setMessage('Price must be a valid number.');
-        return;
-      }
 
       await createProduct({ name, price: priceNumber });
       setMessage('Product created successfully!');
       router.push(`/product/`);
-      // setName('');
-      // setPrice('');
     } catch (error) {
-      console.error('Error creating product:', error);
-      setMessage('Failed to create product.');
+      if (error instanceof z.ZodError) {
+        // Prikazivanje grešaka validacije
+        setMessage(error.errors[0].message);
+      } else {
+        console.error('Error creating product:', error);
+        setMessage('Failed to create product.');
+      }
     }
   };
 
