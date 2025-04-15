@@ -1,12 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/hooks/use-toast";
 import { updateGost } from "@/lib/gost.actions";
 import { useRouter } from "next/navigation";
 
-export default function UpdateGostForm({ id, gost }: { id: string; gost: { name: string; email: string; age: number | null } }) {
+export default function GostForm({ id, gost }: { id: string; gost: { name: string; email: string; age: number | null } ,type:'Create' | 'Update'}) {
   const router = useRouter();
+  const { toast } = useToast();
 
   return (
     <form
