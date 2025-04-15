@@ -5,7 +5,7 @@ import { toast } from "@/hooks/use-toast";
 export default function ToastHandler({ message }: { message: string }) {
   if (message) {
     toast({
-      title: "Validacija uspešna",
+      title: "Product",
       description: message,
       variant: "default",
     });

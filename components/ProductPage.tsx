@@ -15,7 +15,7 @@ export default function ProductPage({ products, error }: { products?: Product; e
   }
 
   if (!products) {
-    toast.error("Product not found");
+    toast.error("Product nije nađen");
     return <div>Nije nađen proizvod</div>;
   }
 
