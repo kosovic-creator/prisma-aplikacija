@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import { useState } from 'react';
@@ -5,6 +6,7 @@ import { createProduct } from '@/lib/product.actions';
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 import productSchema from '@/types';
+import ToastHandler from '@/components/ToastHandler';
 
 
 
@@ -16,7 +18,12 @@ export default function NewProductPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    const productSchema = z.object({
+      name: z.string().min(4, 'Product name is required'),
+      price: z
+        .string()
+        .regex(/^\d+(\.\d{1,2})?$/, 'Price must be a valid number with up to 2 decimal places'),
+    });
     try {
       // Validirajte unos pomoću Zod šeme
       productSchema.parse({ name, price });
@@ -24,7 +31,9 @@ export default function NewProductPage() {
       const priceNumber = parseFloat(price);
 
       await createProduct({ name, price: priceNumber });
+      <ToastHandler message="Uspjesno" />
       setMessage('Product created successfully!');
+
       router.push(`/product/`);
     } catch (error) {
       if (error instanceof z.ZodError) {

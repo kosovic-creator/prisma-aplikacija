@@ -1,6 +1,6 @@
 import { deleteProduct } from '@/lib/product.actions';
 import Link from 'next/link';
-import { notFound as nextNotFound, redirect } from 'next/navigation';
+import { notFound as nextNotFound } from 'next/navigation';
 
 // Define the PageProps type
 interface PageProps {
@@ -10,7 +10,7 @@ interface PageProps {
 }
 
 export default async function page({ params }: PageProps) {
-  const { id } = await params;
+  const { id } = await params; 
 
   try {
     const prod = await deleteProduct(parseInt(id));
