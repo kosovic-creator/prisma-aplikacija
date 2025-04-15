@@ -1,12 +1,36 @@
 'use client';
 
-import { useState } from 'react';
-import { createProduct } from '@/lib/product.actions';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { updateProduct, productById } from '@/lib/product.actions';
 
-export default function NewProductPage() {
+export default function UpdateProductPage({ params }: { params: { id: string } }) {
+  const router = useRouter();
+  const { id } = params;
+
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    // Dohvati trenutne podatke o proizvodu
+    const fetchProduct = async () => {
+      try {
+        const product = await productById(Number(id));
+        if (product) {
+          setName(product.name);
+          setPrice(product.price.toString());
+        } else {
+          setMessage('Product not found');
+        }
+      } catch (error) {
+        console.error('Error fetching product:', error);
+        setMessage('Failed to fetch product.');
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,19 +42,18 @@ export default function NewProductPage() {
         return;
       }
 
-      await createProduct({ name, price: priceNumber });
-      setMessage('Product created successfully!');
-      setName('');
-      setPrice('');
+      await updateProduct(Number(id), { name, price: priceNumber });
+      setMessage('Product updated successfully!');
+      router.push(`/product/${id}`);
     } catch (error) {
-      console.error('Error creating product:', error);
-      setMessage('Failed to create product.');
+      console.error('Error updating product:', error);
+      setMessage('Failed to update product.');
     }
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-3xl font-bold mb-6">Create New Product</h1>
+      <h1 className="text-3xl font-bold mb-6">Update Product</h1>
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6 max-w-sm w-full">
         <div className="mb-4">
           <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
@@ -62,7 +85,7 @@ export default function NewProductPage() {
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
         >
-          Create Product
+          Update Product
         </button>
       </form>
       {message && <p className="mt-4 text-center text-gray-700">{message}</p>}
