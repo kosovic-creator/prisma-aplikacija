@@ -13,7 +13,7 @@ export default async function Product() {
   return (
 
     <div className="flex flex-col items-center justify-center min-h-screen">
-       <Link className='text-emerald-900' href="/product/new>">Add</Link>
+       <Link className='text-emerald-900' href="/product/new">Add</Link>
       <h1 className="text-3xl font-bold mb-6">Products</h1>
       <table className="table-auto border-collapse border border-gray-300 w-full max-w-4xl">
         <thead>

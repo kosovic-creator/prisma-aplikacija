@@ -1,6 +1,7 @@
 'use server'
 
 import prisma from "@/lib/prisma";
+import { redirect } from "next/navigation";
 
 export async function productsAll() {
   try {
@@ -51,7 +52,9 @@ export async function deleteProduct(id: number) {
   try {
     return await prisma.product.delete({
       where: { id },
-    });
+    }
+  );
+
   } catch (error) {
     console.error("Error deleting product:", error);
     throw error;
