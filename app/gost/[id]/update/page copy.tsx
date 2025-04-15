@@ -3,11 +3,12 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { createGostAction } from '@/lib/gost.actions';
+
 import { useActionState } from 'react'
 import GostSchema from '@/types/index';
 import { toast } from '@/hooks/use-toast';
 import { z } from 'zod';
+import { updateGost } from "@/lib/gost.actions";
 
 
 //Definicija zod sheme
@@ -18,24 +19,31 @@ const gostSchema = z.object({
 });
 
 const Page: React.FC = () => {
-    const [state, formAction] = useActionState(async (state: { message: string }, formData: FormData): Promise<{ message: string }> => {
+    const [state, formAction] = useActionState(async (state: { message: string }, formData: updateGost): Promise<{ message: string }> => {
         const data = Object.fromEntries(formData.entries());
 
         // Validacija podataka
-        const parsedData = GostSchema.safeParse({
+        const parsedData = gostSchema.safeParse({
             name: data.name,
             email: data.email,
             age: Number(data.age),
         });
 
         if (!parsedData.success) {
-            // Ako validacija ne uspije, vratite greške
+            // Ako validacija ne uspe, vratite greške
             return { message: parsedData.error.errors.map(err => err.message).join(', ') };
         }
 
-        // Ako validacija uspije, pozovite createGostAction
-        return createGostAction(state, formData);
-    }, { message: '' });
+        // Ako validacija uspe, pozovite updateGost
+        await updateGost({
+            id: parseInt(id, 10),
+            name: parsedData.data.name,
+            email: parsedData.data.email,
+            age: parsedData.data.age,
+        });
+
+        return { message: 'Gost successfully updated!' };
+    });
 
     return (
         <form action={formAction}>
