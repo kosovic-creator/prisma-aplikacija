@@ -23,12 +23,7 @@ export default async function page({
       <Link href={`/gost`}>Nazad</Link>
       {/* <Link href={`/gost/${id}`}>Back to gost</Link> */}
     </div>
-     <div>
-     <h1 className="text-2xl font-bold">Dodaj</h1>
-     <GostForm id={id} gost={{ ...gost, email: gost.email ?? "" }} type={"Create"} />
-     <Link href={`/gost`}>Nazad</Link>
-     {/* <Link href={`/gost/${id}`}>Back to gost</Link> */}
-   </div>
+    
 
 
 
