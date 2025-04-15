@@ -44,7 +44,7 @@ export default function UpdateProductPage({ params }: { params: { id: string } }
 
       await updateProduct(Number(id), { name, price: priceNumber });
       setMessage('Product updated successfully!');
-      router.push(`/product/${id}`);
+      router.push(`/product/`);
     } catch (error) {
       console.error('Error updating product:', error);
       setMessage('Failed to update product.');

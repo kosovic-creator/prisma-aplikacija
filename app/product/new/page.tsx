@@ -2,12 +2,13 @@
 
 import { useState } from 'react';
 import { createProduct } from '@/lib/product.actions';
+import { useRouter } from 'next/navigation';
 
 export default function NewProductPage() {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [message, setMessage] = useState('');
-
+  const router = useRouter();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -20,8 +21,9 @@ export default function NewProductPage() {
 
       await createProduct({ name, price: priceNumber });
       setMessage('Product created successfully!');
-      setName('');
-      setPrice('');
+      router.push(`/product/`);
+      // setName('');
+      // setPrice('');
     } catch (error) {
       console.error('Error creating product:', error);
       setMessage('Failed to create product.');
