@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { gostById } from "@/lib/gost.actions";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import UserSchema from '@/types/index';
+import { toast } from '@/hooks/use-toast';
 
 export default async function page({
 
