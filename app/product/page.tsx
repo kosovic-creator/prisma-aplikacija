@@ -19,6 +19,13 @@ export default async function Product() {
     console.log(products);
 
   return (
-    <div>Product</div>
+    <div>
+      {products.map((product) => (
+        <div key={product.id}>
+          <h2>{product.name}</h2>
+          <p>{product.price}</p>
+        </div>
+      ))}
+    </div>
   )
 }
