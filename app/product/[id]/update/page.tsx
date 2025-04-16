@@ -31,7 +31,7 @@ export default function Page() {
       });
 
       setMessage('Product updated successfully!');
-      router.push('/products'); // Preusmeravanje nakon uspešnog ažuriranja
+      router.push('/product'); // Preusmeravanje nakon uspešnog ažuriranja
     } catch (error) {
       setMessage('Failed to update product.');
     } finally {
