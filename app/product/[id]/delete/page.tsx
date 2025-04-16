@@ -18,8 +18,7 @@ export default async function page({ params }: PageProps) {
         <h1>Delete Product</h1>
         <p>Product with ID {id} has been deleted.</p>
         <Link href="/product">Go back to product list</Link>
-        <Link href={`/product/${id}/update`}>Update Product</Link>
-        <Link href={`/product/${id}/delete`}>Delete Product</Link>
+       
       </>
     );
   }
