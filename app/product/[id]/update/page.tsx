@@ -1,9 +1,13 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
+
 'use client';
 import { updateProduct } from '@/lib/product.actions';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useParams } from 'next/navigation';
+export const fetchCache = 'force-no-store';
+// export const revalidate = 0;
+
 
 export default function Page() {
   const [productName, setProductName] = useState('');
@@ -40,6 +44,7 @@ export default function Page() {
   };
 
   return (
+
     <div>
       <h1>Update Product</h1>
       <form onSubmit={handleUpdate}>
