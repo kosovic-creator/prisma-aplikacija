@@ -2,6 +2,8 @@
 'use client';
 import { updateProduct } from '@/lib/product.actions';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 
 export default function Page() {
   const [productName, setProductName] = useState('');
@@ -9,17 +11,27 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
+  const router = useRouter();
+  const { id } = useParams(); // Dohvatanje ID-a iz URL-a
+
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setMessage('');
 
     try {
-      const updatedProduct = await updateProduct(1, { // Replace '1' with the actual product ID
+      if (!id) {
+        setMessage('Product ID is missing.');
+        return;
+      }
+
+      const updatedProduct = await updateProduct(Number(id), {
         name: productName,
         price: parseFloat(productPrice),
       });
+
       setMessage('Product updated successfully!');
+      router.push('/products'); // Preusmeravanje nakon uspešnog ažuriranja
     } catch (error) {
       setMessage('Failed to update product.');
     } finally {
