@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 import productSchema from '@/types';
 import ToastHandler from '@/components/ToastHandler';
-
+export const fetchCache = 'force-no-store';
 
 
 export default function NewProductPage() {

@@ -42,3 +42,5 @@ export default async function Product() {
     </div>
   );
 }
+
+// API handler moved to a separate file
