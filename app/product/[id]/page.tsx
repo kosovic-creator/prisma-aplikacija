@@ -1,12 +1,14 @@
 import { productById } from '@/lib/product.actions';
-
-import ProductPage from '@/components/ProductPage';
 import ToastHandler from '@/components/ToastHandler';
 
-export default async function page({ params }: { params: { id: string } }) {
-  const { id } =await params;
 
-  try {
+
+export default async function page({  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+
     const products = await productById(parseInt(id));
     if (!products) {
       return <ToastHandler message="Product not found" />;
@@ -28,10 +30,7 @@ export default async function page({ params }: { params: { id: string } }) {
         </div>
       </>
     );
-  } catch (error) {
-    console.error("Error fetching product:", error);
-    return <ProductPage error="An error occurred while fetching the product." />;
   }
-}
+
 //
 // export default async function page({ params }: { params: { id: string } }) {
